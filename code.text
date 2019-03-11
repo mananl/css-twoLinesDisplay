@@ -1,0 +1,34 @@
+
+//html代码
+<div class="item-cont ">
+  <div style="-webkit-box-orient: vertical;" class="content-text " v-html="item.content"></div>
+  <div class="show-text" @click.stop="showAll(index)">展开<i class="down-icon"></i></div>
+  <div class="hide-text" @click.stop="hideAll(index)">收起<i class="up-icon"></i></div>
+</div>
+
+
+
+
+
+//JS代码
+let u = navigator.userAgent;
+let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+// let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+let isHuawei10 = u.indexOf('VIE-AL10')>-1
+
+let heightC = isAndroid?isHuawei10?50:42:50
+let arr = document.getElementsByClassName('content-text')
+if(arr){
+  for(let i in Array.from(arr)){
+    document.getElementsByClassName("content-text")[i].classList.remove("show-hide");
+    document.getElementsByClassName('hide-text')[i].style.display = 'none'
+    console.log(arr[i].offsetHeight)
+    if(arr[i].offsetHeight>heightC){
+      arr[i].classList.add("show-hide");
+      document.getElementsByClassName('show-text')[i].style.display = 'block'
+    }else{
+      document.getElementsByClassName('hide-text')[i].style.display = 'none'
+      document.getElementsByClassName('show-text')[i].style.display = 'none'
+    }
+  }
+}
